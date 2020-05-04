@@ -10,7 +10,7 @@ def predict_strain(text):
     """
     determine and return 5 id for the strains that fit the description provided
     """
-    modelfile = 'CANNABIS_API/models/NN_MJrec.pkl'
+    modelfile = 'CANNABIS_API/models/NN_MJrec.pkl.zip'
     tfidffile = 'CANNABIS_API/models/tfidf.pkl'
     nn = joblib.load(modelfile)
     tfidf = joblib.load(tfidffile)
