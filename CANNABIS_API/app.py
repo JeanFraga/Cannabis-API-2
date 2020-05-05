@@ -16,5 +16,6 @@ def create_app():
     def predicted_strain(text=None):
         predictions = predict_strain(text)
         return jsonify(predictions)
+        # return predictions
 
     return app
