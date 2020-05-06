@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Medical Marijuana Suggester! - {{ title }}</title>
+            <!-- add in a style sheet from picnicss.com -->
+        <link rel="stylesheet" href="https://unpkg.com/picnic">
+    </head>
+
+
+    <body>
+        <h1> Cannabis Suggester, </h1>
+        <h2> Allow this app to help you through your journey of a happier, healthier life. </h2>
+        <form action="/suggestion" method="post">
+            <input type="text" name="string" placeholder="Type a specific set of ailments you wish to treat!">
+            <input type="submit" value="request suggestions">
+        </form>
+        {% block content %}
+
+        {% endblock %}
+    </body>
+
+</html>

@@ -28,9 +28,9 @@ def predict_strain(text):
     top5 = nn.kneighbors([vectdf][0], n_neighbors=5)[1][0].tolist()
 
     recommendations_df = df.iloc[top5]
-    recommendations_df['index']= recommendations_df.index
+    # recommendations_df['index']= recommendations_df.index
     
-    return recommendations_df.to_json()
+    return recommendations_df
 
 
 
