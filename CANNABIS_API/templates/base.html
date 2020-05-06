@@ -10,12 +10,15 @@
     <body>
         <h1> Cannabis Suggester, </h1>
         <h2> Allow this app to help you through your journey of a happier, healthier life. </h2>
+        <!-- add in form to send ailments the user chooses to treat as a string -->
         <form action="/suggestion" method="post">
             <input type="text" name="string" placeholder="Type a specific set of ailments you wish to treat!">
             <input type="submit" value="request suggestions">
         </form>
+        <!-- replaces text inside block with suggestions from DF -->
         {% block content %}
-
+        <h3> Try: headache, sleep, hunger, uplift, relax </h3>
+        <h3> Any combination of effects will work! </h3>
         {% endblock %}
     </body>
 

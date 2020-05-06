@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
+
+
 <h1>{{title}}</h1>
+
+<!-- returns message(can be error if 'try' fails.) -->
+<p>{{ message }}</p>
+
+<!-- displays the dataframe in HTML form -->
 {{predictions | safe}}
+
+
 {% endblock %}
