@@ -16,8 +16,10 @@ def create_app():
 
     # This route is an older method that returns json objects from predictions
     # can be used as api for other applications
+    @app.route('/api', methods=['POST'])
     @app.route('/api/<text>', methods=['GET'])
     def predicted_strain(text=None):
+        text = text or request.values['string']
         predictions = predict_strain(text)
         return jsonify(predictions.to_json())
 
