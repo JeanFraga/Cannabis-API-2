@@ -43,5 +43,21 @@ def create_app():
         return render_template('suggestions.html', title=text,
                                predictions=predictions.to_html(),
                                message=message)
-
+    
+    # this route will return the strains closest to the one provided by the user based on information available in the dataframe
+    @app.route('/similar', methods=['POST'])
+    @app.route('/similar/<text>', methods=['GET'])
+    def similar(text=None, message=''):
+        text = text or request.values['string']
+        # process strain user chose
+        try:
+            if request.method == 'POST':
+                message = 'These strains are closest to the one selected'
+            
+            predictions = predict_strain(text)
+        except Exception as e:
+            message = "Something went wrong processing {}: {}".format(text, e)
+        return render_template('suggestions.html', title=text,
+                               predictions=predictions.to_html(),
+                               message=message)
     return app
