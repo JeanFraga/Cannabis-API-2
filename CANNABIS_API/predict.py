@@ -6,6 +6,7 @@ import joblib
 import pandas as pd
 
 
+
 def predict_strain(text):
     """
     determine and return 20 id for the strains that fit the description provided
@@ -16,12 +17,12 @@ def predict_strain(text):
     nn = joblib.load(modelfile)
     tfidf = joblib.load(tfidffile)
 
-    # load the dataframe from pandas
-    df = pd.read_csv('CANNABIS_API/models/cannabis-strains.zip')
-
     # Transform
     text = pd.Series(text)
     vect = tfidf.transform(text)
+
+    # load the dataframe from pandas
+    df = pd.read_csv('CANNABIS_API/models/cannabis-strains.zip')
 
     # Send to df
     vectdf = pd.DataFrame(vect.todense())
@@ -34,5 +35,19 @@ def predict_strain(text):
     
     return recommendations_df
 
+def similar_strain(strain):
+    """
+    processes the strain if it exists in the dataframe to get it ready for 'predict_strain'
+    """
+    df_token = pd.read_csv('CANNABIS_API/models/cannabis-strains-token.zip')
+    temp = df_token[df_token['Strain']==strain]
+    # print(temp.tokens[0])
+    if len(temp) == 1:
+        text = temp.tokens
+        # print(text)
+    else:
+        text = strain
+        # print(text)
+    return text
 
 

@@ -15,6 +15,10 @@
             <input type="text" name="string" placeholder="Type a specific set of ailments you wish to treat!">
             <input type="submit" value="request suggestions">
         </form>
+        <form action="/similar" method="post">
+            <input type="text" name="string" placeholder="Type the strain, we will find similar strains to it">
+            <input type="submit" value="request similar">
+        </form>
         <!-- replaces text inside block with suggestions from DF -->
         {% block content %}
         <h3> Try: headache, sleep, hunger, uplift, relax </h3>

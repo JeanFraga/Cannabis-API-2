@@ -6,7 +6,7 @@ from decouple import config
 from flask import Flask, request, jsonify, render_template
 from dotenv import load_dotenv
 
-from .predict import predict_strain
+from .predict import predict_strain, similar_strain
 load_dotenv()
 
 # app factory method
@@ -53,11 +53,12 @@ def create_app():
         try:
             if request.method == 'POST':
                 message = 'These strains are closest to the one selected'
-            
-            predictions = predict_strain(text)
+            text_str = similar_strain(text)
+            predictions = predict_strain(text_str).to_html()
         except Exception as e:
-            message = "Something went wrong processing {}: {}".format(text, e)
+            message = "The strain {}: {} does not exist in the database".format(text, e)
+            predictions = 'None'
         return render_template('suggestions.html', title=text,
-                               predictions=predictions.to_html(),
+                               predictions=predictions,
                                message=message)
     return app
