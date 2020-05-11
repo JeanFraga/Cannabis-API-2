@@ -5,10 +5,14 @@ Build my app factory and do routes and configuration
 from decouple import config
 from flask import Flask, request, jsonify, render_template
 from dotenv import load_dotenv
+import pandas as pd
+import numpy as np
 
 from .predict import predict_strain, similar_strain
 load_dotenv()
 
+df = pd.read_csv('CANNABIS_API/models/cannabis-strains.zip')
+arra = df[['Strain']].to_numpy()
 # app factory method
 
 def create_app():
@@ -26,7 +30,7 @@ def create_app():
     # home page that renders base.html
     @app.route('/')
     def root():
-        return render_template('base.html', tittle='Home')
+        return render_template('base.html', tittle='Home', strains=arra)
     
     # this route can take text from suggestion or post method to return predictions
     @app.route('/suggestion', methods=['POST'])
@@ -42,7 +46,8 @@ def create_app():
             message = "Something went wrong processing {}: {}".format(text, e)
         return render_template('suggestions.html', title=text,
                                predictions=predictions.to_html(),
-                               message=message)
+                               message=message,
+                               strains=arra)
     
     # this route will return the strains closest to the one provided by the user based on information available in the dataframe
     @app.route('/similar', methods=['POST'])
@@ -60,5 +65,6 @@ def create_app():
             predictions = 'None'
         return render_template('suggestions.html', title=text,
                                predictions=predictions,
-                               message=message)
+                               message=message,
+                               strains=arra)
     return app

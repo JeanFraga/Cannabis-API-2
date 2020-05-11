@@ -8,21 +8,31 @@
 
 
     <body>
-        <h1> Cannabis Suggester, </h1>
-        <h2> Allow this app to help you through your journey to a happier, healthier life. </h2>
+        <h1> Cannabis Suggester </h1>
+        <h1> Choose from the following ways of finding the best strain that fits your needs. </h2>
+        <h2> Here you can type the ailments you wish to treat or simply properties of your ideal strain! </h2>
         <!-- add in form to send ailments the user chooses to treat as a string -->
         <form action="/suggestion" method="post">
             <input type="text" name="string" placeholder="Type a specific set of ailments you wish to treat!">
             <input type="submit" value="request suggestions">
         </form>
+        <h2> Optionally you can also query similar strains to one you already know you want. </h2>
         <form action="/similar" method="post">
-            <input type="text" name="string" placeholder="Type the strain, we will find similar strains to it">
+            <select name="string">
+                {% for strain in strains %}
+                <option value = "{{ strain }}">{{ strain }}</option>
+                {% endfor %}
+            </select>
             <input type="submit" value="request similar">
         </form>
         <!-- replaces text inside block with suggestions from DF -->
         {% block content %}
         <h3> Try: headache, sleep, hunger, uplift, relax </h3>
         <h3> Any combination of effects will work! </h3>
+        <h3> Thank you for stopping by!</h3>
+        <h3></h3>
+        <a href="https://jeanfraga.github.io/2019-11-22-Medical-Cabinet/">Check out how I made this dope app :D</a>
+        <h4></h4>
         {% endblock %}
     </body>
 
