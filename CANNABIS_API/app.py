@@ -11,9 +11,8 @@ import numpy as np
 from .predict import predict_strain, similar_strain
 load_dotenv()
 
-df = pd.read_csv('CANNABIS_API/models/cannabis-strains.zip')
-arra = df[['Strain']].to_numpy()
-# app factory method
+arra = pd.read_csv('CANNABIS_API/models/cannabis-strains.zip')
+arra = arra.Strain
 
 def create_app():
     app = Flask(__name__)
