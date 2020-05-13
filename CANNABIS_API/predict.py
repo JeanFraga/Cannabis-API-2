@@ -7,7 +7,7 @@ import pandas as pd
 
 
 
-def predict_strain(text):
+def predict_strain(text, df):
     """
     determine and return 20 id for the strains that fit the description provided
     """
@@ -22,7 +22,7 @@ def predict_strain(text):
     vect = tfidf.transform(text)
 
     # load the dataframe from pandas
-    df = pd.read_csv('CANNABIS_API/models/cannabis-strains.zip')
+    # df = pd.read_csv('CANNABIS_API/models/cannabis-strains.zip')
 
     # Send to df
     vectdf = pd.DataFrame(vect.todense())
@@ -35,19 +35,13 @@ def predict_strain(text):
     
     return recommendations_df
 
-def similar_strain(strain):
+def similar_strain(strain, df_token):
     """
     processes the strain if it exists in the dataframe to get it ready for 'predict_strain'
     """
-    df_token = pd.read_csv('CANNABIS_API/models/cannabis-strains-token.zip')
+    # df_token = pd.read_csv('CANNABIS_API/models/cannabis-strains-token.zip')
     temp = df_token[df_token['Strain']==strain]
-    # print(temp.tokens[0])
-    if len(temp) == 1:
-        text = temp.tokens
-        # print(text)
-    else:
-        text = strain
-        # print(text)
+    text = temp.tokens
     return text
 
 

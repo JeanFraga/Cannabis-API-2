@@ -11,8 +11,11 @@ import numpy as np
 from .predict import predict_strain, similar_strain
 load_dotenv()
 
-arra = pd.read_csv('CANNABIS_API/models/cannabis-strains.zip')
-arra = arra.Strain
+df = pd.read_csv('CANNABIS_API/models/cannabis-strains.zip')
+arra = df.Strain
+df_token = pd.read_csv('CANNABIS_API/models/cannabis-strains-token.zip')
+
+
 
 def create_app():
     app = Flask(__name__)
@@ -23,7 +26,7 @@ def create_app():
     @app.route('/api/<text>', methods=['GET'])
     def predicted_strain(text=None):
         text = text or request.values['string']
-        predictions = predict_strain(text)
+        predictions = predict_strain(text, df)
         return jsonify(predictions.to_json())
 
     # home page that renders base.html
@@ -57,8 +60,8 @@ def create_app():
         try:
             if request.method == 'POST':
                 message = 'These strains are closest to the one selected'
-            text_str = similar_strain(text)
-            predictions = predict_strain(text_str).to_html()
+            text_str = similar_strain(text, df_token)
+            predictions = predict_strain(text_str, df).to_html()
         except Exception as e:
             message = "The strain {}: {} does not exist in the database".format(text, e)
             predictions = 'None'
