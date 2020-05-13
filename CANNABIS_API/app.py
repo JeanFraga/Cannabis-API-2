@@ -12,7 +12,7 @@ from .predict import predict_strain, similar_strain
 load_dotenv()
 
 df = pd.read_csv('CANNABIS_API/models/cannabis-strains.zip')
-arra = df.Strain
+# arra = df.Strain
 df_token = pd.read_csv('CANNABIS_API/models/cannabis-strains-token.zip')
 
 
@@ -32,7 +32,7 @@ def create_app():
     # home page that renders base.html
     @app.route('/')
     def root():
-        return render_template('base.html', tittle='Home', strains=arra)
+        return render_template('base.html', tittle='Home', strains=df.Strain)
     
     # this route can take text from suggestion or post method to return predictions
     @app.route('/suggestion', methods=['POST'])
@@ -43,13 +43,13 @@ def create_app():
         try:
             if request.method == 'POST':
                 message = 'These strians may help; if not try being more specific.'
-            predictions = predict_strain(text)
+            predictions = predict_strain(text, df)
         except Exception as e:
             message = "Something went wrong processing {}: {}".format(text, e)
         return render_template('suggestions.html', title=text,
                                predictions=predictions.to_html(),
                                message=message,
-                               strains=arra)
+                               strains=df.Strain)
     
     # this route will return the strains closest to the one provided by the user based on information available in the dataframe
     @app.route('/similar', methods=['POST'])
@@ -68,5 +68,5 @@ def create_app():
         return render_template('suggestions.html', title=text,
                                predictions=predictions,
                                message=message,
-                               strains=arra)
+                               strains=df.Strain)
     return app
