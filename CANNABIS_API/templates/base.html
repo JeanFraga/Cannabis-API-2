@@ -10,14 +10,15 @@
     <body>
         <img src="https://raw.githubusercontent.com/JeanFraga/Cannabis-API-2/master/CANNABIS_API/templates/assets/HempMeLogo.jpeg"
             alt="HempMe"
-            title="HempMe"
+            title="HempMe logo"
             width="200">
+            <!-- height="250"> -->
         <!-- <h1> HempMe </h1> -->
         <!-- <h2> Choose from the following ways of finding the best strain that fits your needs. </h2> -->
         <h2> Here you can type the ailments you wish to treat or simply properties of your ideal strain! </h2>
         <!-- add in form to send ailments the user chooses to treat as a string -->
         <form action="/suggestion" method="post">
-            <input type="text" name="string" placeholder="Type a specific set of ailments you wish to treat!">
+            <input type="text" name="string" placeholder="Try: headache, sleep, hunger, uplift, relax">
             <input type="submit" value="request suggestions">
         </form>
         <h2> Optionally you can also query similar strains to one you already know you want. </h2>
@@ -31,7 +32,7 @@
         </form>
         <!-- replaces text inside block with suggestions from DF -->
         {% block content %}
-        <h3> Try: headache, sleep, hunger, uplift, relax </h3>
+        <!-- <h3> Try: headache, sleep, hunger, uplift, relax </h3> -->
         <h3> Any combination of effects will work! </h3>
         <h3> Thank you for stopping by!</h3>
         <h3></h3>
