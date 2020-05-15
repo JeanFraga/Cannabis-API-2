@@ -58,11 +58,11 @@ def create_app():
         # process strain user chose
         try:
             if request.method == 'POST':
-                message = 'These strains are closest to the one selected'
+                message = 'Enjoy!'
             text_str = similar_strain(text, df_token)
             predictions = predict_strain(text_str, df).to_html()
         except Exception as e:
-            message = "Strain {} does not exist in the database. Error: {} ".format(text, e)
+            message = 'Strain "{}" does not exist in the database. Error: {} '.format(text, e)
             predictions = 'None'
         return render_template('suggestions.html', title=text,
                                predictions=predictions,
