@@ -38,6 +38,8 @@ def similar_strain(strain, df_token):
     """
     # if the strain exists in the df it will separate it into a temp var
     temp = df_token[df_token['Strain']==strain]
+
+    # locs column ['tokens']
     text = temp.tokens
     return text
 
