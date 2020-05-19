@@ -27,6 +27,7 @@ def predict_strain(text, df):
     # Return a list of indexes
     top20 = nn.kneighbors([vectdf][0], n_neighbors=20)[1][0].tolist()
 
+    # locs the the top20 predictions into new DF
     recommendations_df = df.iloc[top20]
     
     return recommendations_df
