@@ -36,6 +36,7 @@ def similar_strain(strain, df_token):
     """
     processes the strain if it exists in the dataframe to get it ready for 'predict_strain'
     """
+    # if the strain exists in the df it will separate it into a temp var
     temp = df_token[df_token['Strain']==strain]
     text = temp.tokens
     return text
