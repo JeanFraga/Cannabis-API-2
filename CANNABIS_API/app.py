@@ -15,7 +15,6 @@ df = pd.read_csv('CANNABIS_API/models/cannabis-strains.zip')
 df_token = pd.read_csv('CANNABIS_API/models/cannabis-strains-token.zip')
 
 
-
 def create_app():
     app = Flask(__name__)
 
