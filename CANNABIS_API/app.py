@@ -34,6 +34,7 @@ def create_app():
     
     # this route can take text from suggestion or post method to return predictions
     @app.route('/suggestion', methods=['POST'])
+    # Kept this 'Get' method to test wrong posts. Now returns correct error
     @app.route('/suggestion/<text>', methods=['GET'])
     def suggestion(text=None, message=''):
         text = text or request.values['string']
